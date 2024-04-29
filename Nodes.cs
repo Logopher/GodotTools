@@ -52,7 +52,7 @@ public static class Nodes
 		yield return selector(n, children);
 
 		foreach (var result in children
-			.GetMany(c => c.GetDescendantsDepthFirst(selector)))
+			.SelectMany(c => c.GetDescendantsDepthFirst(selector)))
 		{
 			yield return result;
 		}
@@ -75,7 +75,7 @@ public static class Nodes
 		while (true)
 		{
 			descendants = descendants
-				.GetMany(c => c.GetChildren())
+				.SelectMany(c => c.GetChildren())
 				.ToArray();
 
 			// By putting the condition here we don't call 'selector([n])'
